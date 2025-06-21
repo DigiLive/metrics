@@ -41,12 +41,14 @@ RUN chmod +x /metrics/source/app/action/index.mjs \
   # Install deno for miscellaneous scripts
   && curl -fsSL https://deno.land/x/install/install.sh | DENO_INSTALL=/usr/local sh \
   # Install ruby gem (licensed) after all dependencies
-  && gem install licensed \
-  # Clean apt/lists
+  && gem install licensed --no-document --verbose \
+  && echo "Gem installed" \
   && rm -rf /var/lib/apt/lists/* \
-  # Install node modules and rebuild indexes
-  && npm ci \
-  && npm run build
+  && echo "Apt lists cleaned" \
+  && npm ci --verbose \
+  && echo "npm ci done" \
+  && npm run build \
+  && echo "npm run build done"
 
 # Environment variables
 ENV PUPPETEER_SKIP_CHROMIUM_DOWNLOAD true
