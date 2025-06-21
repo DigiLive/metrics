@@ -3,6 +3,8 @@ FROM node:20-bookworm-slim
 
 # Set apt to non-interactive mode
 ENV DEBIAN_FRONTEND=noninteractive
+ENV PUPPETEER_SKIP_CHROMIUM_DOWNLOAD true
+ENV PUPPETEER_BROWSER_PATH "google-chrome-stable"
 
 # Copy repository
 COPY . /metrics
@@ -49,10 +51,6 @@ RUN chmod +x /metrics/source/app/action/index.mjs \
   && echo "npm ci done" \
   && npm run build \
   && echo "npm run build done"
-
-# Environment variables
-ENV PUPPETEER_SKIP_CHROMIUM_DOWNLOAD true
-ENV PUPPETEER_BROWSER_PATH "google-chrome-stable"
 
 # Execute GitHub action
 ENTRYPOINT node /metrics/source/app/action/index.mjs
