@@ -3,6 +3,7 @@ FROM node:20-bookworm-slim
 
 # Set apt to non-interactive mode
 ENV DEBIAN_FRONTEND=noninteractive
+ENV PUPPETEER_SKIP_DOWNLOAD=true
 ENV PUPPETEER_SKIP_CHROMIUM_DOWNLOAD=true
 ENV PUPPETEER_BROWSER_PATH="google-chrome-stable"
 
@@ -17,7 +18,7 @@ RUN chmod +x /metrics/source/app/action/index.mjs \
   && apt-get update \
   && apt-get install -y wget gnupg ca-certificates libgconf-2-4 curl unzip \
   && wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | apt-key add - \
-  && sh -c 'echo "deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main" > /etc/apt/sources.list.d/google-chrome.list' \
+  && sh -c 'echo "deb [arch=amd64 signed-by=/etc/apt/keyrings/google.asc] http://dl.google.com/linux/chrome/deb/ stable main" > /etc/apt/sources.list.d/google.list' \
   && apt-get update \
   && apt-get install -y \
         google-chrome-stable \
