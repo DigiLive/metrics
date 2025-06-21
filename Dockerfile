@@ -3,8 +3,8 @@ FROM node:20-bookworm-slim
 
 # Set apt to non-interactive mode
 ENV DEBIAN_FRONTEND=noninteractive
-ENV PUPPETEER_SKIP_CHROMIUM_DOWNLOAD true
-ENV PUPPETEER_BROWSER_PATH "google-chrome-stable"
+ENV PUPPETEER_SKIP_CHROMIUM_DOWNLOAD=true
+ENV PUPPETEER_BROWSER_PATH="google-chrome-stable"
 
 # Copy repository
 COPY . /metrics
